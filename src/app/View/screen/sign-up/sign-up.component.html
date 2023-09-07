@@ -1,0 +1,69 @@
+<!-- signup.component.html -->
+<div class="page">
+    <div>
+        <form [formGroup]="registrationForm!" (ngSubmit)="register(registrationForm!.value)">
+            <mat-card class="card">
+                <!-- ... -->
+                <div class="text-register">
+                    <h2>Register</h2>
+                </div>
+                <!-- ... -->
+                <div class="personal-information">
+                    <mat-card-content class="card-content">    
+                            <!-- ... -->
+                            <mat-form-field>
+                                <mat-label>user name</mat-label>
+                                <input matInput formControlName="UserName" placeholder="Username">
+                                <mat-error *ngIf="registrationForm!.get('UserName')!.hasError('required')">Username is required</mat-error>
+                                <mat-error *ngIf="registrationForm!.get('UserName')!.hasError('minlength')">minimum 2 charactors needs</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                            <mat-form-field class="email">
+                                <mat-label>email</mat-label>
+                                <input matInput formControlName="email" placeholder="example@mail">
+                                <mat-error *ngIf="registrationForm!.get('email')!.hasError('required')">Email is required</mat-error>
+                                <mat-error *ngIf="registrationForm!.get('email')!.hasError('email')">Invalid email format</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                            <mat-form-field>
+                                <mat-label>password</mat-label>
+                                <input matInput formControlName="password" type="password" placeholder="Password">
+                                <mat-error *ngIf="registrationForm!.get('password')!.hasError('required')">Password is required</mat-error>
+                                <mat-error *ngIf="registrationForm!.get('password')!.hasError('minlength')">minimum 6 charactors needs</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                            <mat-form-field>
+                                <mat-label>fullname</mat-label>
+                                <input matInput formControlName="Name" placeholder="Fullname">
+                                <mat-error *ngIf="registrationForm!.get('Name')!.hasError('required')">Fullname is required</mat-error>
+                                <mat-error *ngIf="registrationForm!.get('Name')!.hasError('minlength')">minimum 2 charactors needs</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                            <mat-form-field>
+                                <mat-label>mobile</mat-label>
+                                <input matInput formControlName="PhoneNumber" placeholder="Mobile">
+                                <mat-error *ngIf="registrationForm!.get('PhoneNumber')!.hasError('required')">Mobile is required</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                            <mat-form-field>
+                                <mat-label>address</mat-label>
+                                <input matInput formControlName="address" placeholder="Address">
+                                <mat-error *ngIf="registrationForm!.get('address')!.hasError('required')">Address is required</mat-error>
+                            </mat-form-field>
+                            <!-- ... -->
+                    </mat-card-content>
+                        <!-- ... -->
+                </div>
+                <mat-card-footer *ngIf="this.isLoading">
+                    <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+                </mat-card-footer>
+                <!-- ... -->
+            </mat-card>
+            <p class="text-under-card">Alreadey have an account?<span><button class="route-button" mat-button color="#eee" (click)="goToLoginPage()">Log
+                    in</button></span></p>
+            <div class="register">
+                <button type="submit" class="button-reg" mat-stroked-button color="primary" [disabled]="registrationForm!.invalid">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

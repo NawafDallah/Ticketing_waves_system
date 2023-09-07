@@ -1,0 +1,56 @@
+<div class="header">
+    <h1>Create Ticket</h1>
+</div>
+<form [formGroup]="form!" class="normal-form" (ngSubmit)="onTicketCreate(form!.value)">
+    <mat-grid-list [cols]=" cols | async" rowHeight="300px">
+        <mat-grid-tile>
+            <div class="container">
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>title</mat-label>
+                    <input formControlName="title" matInput placeholder="title">
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>product</mat-label>
+                    <mat-select formControlName="productID" matInput>
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let prod of products" [value]=prod.id >
+                            {{prod.name}}
+                        </mat-option>
+                        <!-- <mat-option *ngFor="let prod of product" [value]="product">
+                            {{}}
+                        </mat-option> -->
+                    </mat-select>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <!-- <mat-form-field>
+                    <mat-label>file</mat-label>
+                    <input formControlName="file" matInput placeholder="file">
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field> -->
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>description</mat-label>
+                    <textarea class="textArea" formControlName="description" matInput placeholder="write your description here"></textarea>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+            </div>
+        </mat-grid-tile>
+        <!-- ... -->
+        <!-- <mat-grid-tile>
+            <div class="container">
+                
+            </div>
+        </mat-grid-tile> -->
+    </mat-grid-list>
+    <!-- ... -->
+    <div class="button-row">
+        <button class="button-submit" type="submit" mat-raised-button [disabled]="form!.invalid">create</button>
+        <button class="button-cancel" mat-stroked-button (click)="onCancel()">Cancel</button>
+    </div>
+    <!-- ... -->
+</form>

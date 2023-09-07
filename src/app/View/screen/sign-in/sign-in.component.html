@@ -1,0 +1,47 @@
+    <div class="page">
+    
+        <div >
+            <div style="margin: 15px 120px;">
+                <img class="logo" src="../../../../../assets/images/ticketWaves.png" alt="Ticketing waves">
+            </div>
+            <form [formGroup]="loginForm!" (ngSubmit)="login(loginForm!.value)">
+                <mat-card class="card" >
+                    <mat-card-content>
+                        <div class="text-register">
+                            <h2>Login</h2>
+                        </div>
+                        <!-- ... -->
+                        <mat-form-field class="email">
+                            <mat-label>email</mat-label>
+                            <input matInput formControlName="email" placeholder="example@mail.com">
+                            <mat-error *ngIf="loginForm!.get('email')!.hasError('required')">Email is
+                                required</mat-error>
+                            <mat-error *ngIf="loginForm!.get('email')!.hasError('email')">Invalid email
+                                format</mat-error>
+                        </mat-form-field>
+                        <!-- ... -->
+                        <mat-form-field class="password">
+                            <mat-label>password</mat-label>
+                            <input matInput formControlName="password" type="password" placeholder="password">
+                            <mat-error *ngIf="loginForm!.get('password')!.hasError('required')">Password is
+                                required</mat-error>
+                            <mat-error *ngIf="loginForm!.get('password')!.hasError('minlength')">minimum 6 charactors
+                                needs</mat-error>
+                        </mat-form-field>
+                        <!-- ... -->
+                    </mat-card-content>
+                    <!-- ... -->
+                    <mat-card-footer *ngIf="this.isLoading">
+                        <mat-progress-bar *ngIf="false" mode="indeterminate"></mat-progress-bar>
+                    </mat-card-footer>
+                    <!-- ... -->
+                </mat-card>
+                <p style="color: #eee;"> Don't have an account?<span><button class="route-button" mat-button
+                            color="#eee" (click)="goToRigestrePage()">Register</button></span></p>
+                <div class="register">
+                    <button type="submit" class="button-reg" mat-stroked-button color="primary"
+                        [disabled]="loginForm!.invalid">login</button>
+                </div>
+            </form>
+        </div>
+    </div>

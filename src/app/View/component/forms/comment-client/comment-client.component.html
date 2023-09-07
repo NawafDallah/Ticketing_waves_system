@@ -1,0 +1,25 @@
+<div class="header">
+    <h1>Comment Ticket</h1>
+</div>
+<form [formGroup]="form!" class="normal-form" (ngSubmit)="onComment(form!.value)">
+    <mat-grid-list [cols]=" cols | async" rowHeight="200px">
+        <mat-grid-tile>
+            <div class="container">
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>comment</mat-label>
+                    <textarea class="textArea" formControlName="text" matInput
+                        placeholder="write your comment here"></textarea>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <!-- ... -->
+    <div class="button-row">
+        <button class="button-submit" mat-raised-button [disabled]="form!.invalid">Send</button>
+        <button class="button-cancel" mat-stroked-button (click)="onCancel()">Cancel</button>
+    </div>
+    <!-- ... -->
+</form>

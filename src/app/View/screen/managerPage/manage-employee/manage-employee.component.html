@@ -1,0 +1,14 @@
+<div class="page">
+    <div class="header">
+        <h1>Employees</h1>
+    
+        <button class="add-emp" mat-raised-button style="background-color: #154c79; color: #ddd;"
+            (click)="onOpenAddEmployeeDialog()">
+            add employee</button>
+    </div>
+    <!-- <app-filter-by-search></app-filter-by-search> -->
+    
+    <div>
+        <app-shared-table [dataSource]="dataSource!" [columns]="columns" [role]="role"></app-shared-table>
+    </div>
+</div>

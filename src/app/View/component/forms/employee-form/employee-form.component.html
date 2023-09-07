@@ -1,0 +1,96 @@
+<div class="header">
+    <h1>{{row === null ? "Add Employee" : "Edit Employee"}}</h1>
+</div>
+<form [formGroup]="form!" class="normal-form"
+    (ngSubmit)="row === null? onAddEmployee(form!.value) :  onEditEmployee(form!.value)">
+    <mat-grid-list [cols]="cols | async" rowHeight="230px">
+        <mat-grid-tile>
+            <div class="container"> 
+                <!-- ... -->
+                <mat-form-field *ngIf="row === null">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="Email" matInput>
+                    <mat-error *ngIf="form?.get('Email')?.errors?.['required']">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form?.get('Email')?.errors?.['email']">invalid email</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row === null">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="Password" matInput type="password">
+                    <mat-error *ngIf="form?.get('Password')?.errors?.['required']">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form?.get('Passowrd')?.errors?.['minlength']">mimimum 8 charactors
+                        needs</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>name</mat-label>
+                    <input formControlName="name" matInput>
+                    <mat-error *ngIf="form?.get('name')?.errors?.['required']">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form?.get('name')?.errors?.['minlength']">mimimum 2 charactors needs</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row !== null">
+                    <mat-label>mobile</mat-label>
+                    <input formControlName="phoneNumber" matInput>
+                    <mat-error *ngIf="form?.get('phoneNumber')?.errors?.['required']">This field is
+                        mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row !== null">
+                    <mat-label>address</mat-label>
+                    <input formControlName="address" matInput>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+            </div>
+        </mat-grid-tile>
+        <!-- ... -->
+        <mat-grid-tile>
+            <div class="container">
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                    <mat-error>This field is mandatory</mat-error>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row !== null">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="Email" matInput>
+                    <mat-error *ngIf="form?.get('Email')?.errors?.['required']">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form?.get('Email')?.errors?.['email']">invalid email</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row !== null">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="Password" matInput type="password">
+                    <mat-error *ngIf="form?.get('Password')?.errors?.['required']">This field is mandatory</mat-error>
+                    <mat-error *ngIf="form?.get('Passowrd')?.errors?.['minlength']">mimimum 8 charactors
+                        needs</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row === null">
+                    <mat-label>mobile</mat-label>
+                    <input formControlName="phoneNumber" matInput>
+                    <mat-error *ngIf="form?.get('phoneNumber')?.errors?.['required']">This field is
+                        mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field *ngIf="row === null">
+                    <mat-label>address</mat-label>
+                    <input formControlName="address" matInput>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <div class="button-row">
+        <button class="button-submit" type="submit" mat-raised-button [disabled]="form!.invalid">{{row === null?
+            "add" :
+            "save"}}</button>
+        <button class="button-cancel" mat-stroked-button (click)="onCancel()">Cancel</button>
+    </div>
+</form>

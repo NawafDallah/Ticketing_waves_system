@@ -1,0 +1,173 @@
+<div>
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="search here..." [(ngModel)]="searchText">
+    </mat-form-field>
+    <ng-container>
+        <button (click)="role === 'manageEmployee'? searchEmployeeByName() :  
+            role === 'manageClient'? searchClientByName() : 
+            role === 'ticketClient'? searchTicketClientByName() : 
+            role === 'ticketEmployee'? searchTicketEmployeeByName() : searchTicket()" class="button-reg"
+            mat-stroked-button color="primary">Search</button>
+    </ng-container>
+</div>
+
+<div>
+    <table mat-table [dataSource]="dataSource!" matSort>
+
+
+        <!-- ... sppiner -->
+        <!-- <ng-container *ngIf="true">
+
+            <div class="sppiner">
+                <mat-spinner></mat-spinner>
+            </div>
+
+        </ng-container> -->
+
+
+        <!-- ... -->
+        <!-- ... -->
+        <ng-container matColumnDef="#">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+            <td mat-cell *matCellDef="let row;index as i">{{i + 1}}</td>
+        </ng-container>
+        <!-- ... -->
+
+        <!-- .........ticketManager and ticketEmployee and ticketClient........... -->
+        <ng-container matColumnDef="id"
+            *ngIf="role === 'manageTicket' || role === 'ticketEmployee' || role === 'ticketClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+            <td mat-cell *matCellDef="let row">{{row.title}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="clientName" *ngIf="role === 'manageTicket' || role === 'ticketEmployee'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Client</th>
+            <td mat-cell *matCellDef="let row">{{row.clientName}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="empName" *ngIf="role === 'manageTicket' || role === 'ticketClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+            <td mat-cell *matCellDef="let row">{{row.employeeName === null? '------' :
+                row.employeeName}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="product" *ngIf="role === 'manageTicket'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+            <td mat-cell *matCellDef="let row;index as i">{{row.productName!}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="stutas"
+            *ngIf="role === 'manageTicket' || role === 'ticketEmployee' || role === 'ticketClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let row"><span *ngIf="row.status === 0">new</span>
+                <span *ngIf="row.status === 1">open</span>
+                <span *ngIf="row.status === 2">closed</span>
+            </td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="close" *ngIf="role === 'ticketEmployee'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Close</th>
+            <td mat-cell *matCellDef="let row">
+                <mat-slide-toggle [(ngModel)]="row.status === 1? !row.status : row.status"
+                    (change)="toggleTicketClosed(row)" color="green" [disabled]="row.status === 2">
+                </mat-slide-toggle>
+            </td>
+        </ng-container>
+        <!-- ... -->
+
+
+
+        <!-- .........manageEmplyee and manageClient........... -->
+        <ng-container matColumnDef="name" *ngIf="role === 'manageEmployee' || role === 'manageClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let row">{{role === 'manageEmployee'? row.name: row.name}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="mobile" *ngIf="role === 'manageEmployee' || role === 'manageClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</th>
+            <td mat-cell *matCellDef="let row">{{row.phoneNumber}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="birthDate" *ngIf="role === 'manageEmployee'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>BirthDate</th>
+            <td mat-cell *matCellDef="let row">{{row.dateOfBirth}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="address" *ngIf="role === 'manageEmployee' || role === 'manageClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Adress</th>
+            <td mat-cell *matCellDef="let row">{{row.address}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="nbTickets" *ngIf="role === 'manageClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>#Ticket</th>
+            <td mat-cell *matCellDef="let row;">{{row.ticketNumber}}</td>
+        </ng-container>
+        <!-- ... -->
+        <ng-container matColumnDef="active" *ngIf="role === 'manageEmployee' || role === 'manageClient'">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>deActive</th>
+            <td mat-cell *matCellDef="let row"><mat-slide-toggle [(ngModel)]="row.lockoutEnabled"
+                    (change)="toggleUserActivation(row)" color="warn"></mat-slide-toggle></td>
+        </ng-container>
+        <!-- ... -->
+
+        <!--.....................Actions..................... -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row">
+
+                <!-- ....Employee edit button.... -->
+                <ng-container *ngIf="role === 'manageEmployee'">
+                    <button mat-stroked-button style="color: #154c79;  font-weight: bold;
+                            font-family: Arial, Helvetica, sans-serif;" (click)="onEditEmployee(row)">Edit</button>
+                </ng-container>
+                <!-- .... action buttons .... -->
+                <ng-container *ngIf="role !== 'manageEmployee'">
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="onAssignTicket(row)" *ngIf="role === 'manageTicket'">
+                            <mat-icon>dialpad</mat-icon>
+                            <span>Assign</span>
+                        </button>
+                        <button mat-menu-item (click)="onViewTicket(row)"
+                            *ngIf="role === 'ticketEmployee' || role === 'ticketClient' || role === 'manageTicket'">
+                            <mat-icon>dialpad</mat-icon>
+                            <span>View</span>
+                        </button>
+                        <button mat-menu-item (click)="onEditTicket(row)" *ngIf="role === 'ticketClient'">
+                            <mat-icon>dialpad</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <button mat-menu-item (click)="onCommentTicket(row)"
+                            *ngIf="role === 'ticketEmployee'">
+                            <mat-icon>dialpad</mat-icon>
+                            <span>Comment</span>
+                        </button>
+                        <button mat-menu-item (click)="onClientCommentTicket(row)" *ngIf="role === 'ticketClient'">
+                            <mat-icon>dialpad</mat-icon>
+                            <span>Comment</span>
+                        </button>
+                    </mat-menu>
+                </ng-container>
+            </td>
+        </ng-container>
+        <!-- ... -->
+
+
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    </table>
+
+
+    <mat-paginator [length]="dataSource!.data.length" [pageSize]="15" [pageSizeOptions]="[1, 5, 10, 15]"
+        aria-label="Select page" showFirstLastButtons>
+    </mat-paginator>
+</div>

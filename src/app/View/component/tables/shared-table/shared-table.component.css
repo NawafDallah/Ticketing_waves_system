@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+}
+
+.sppiner {
+    display: grid;
+    place-content: center;
+    place-items: center;
+}
+
+mat-form-field {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.button-reg {
+    margin: 0;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #154c79;
+    color: #ddd;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: green;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: green;
+}

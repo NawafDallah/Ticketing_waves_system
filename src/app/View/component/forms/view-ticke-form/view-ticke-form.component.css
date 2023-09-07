@@ -1,0 +1,90 @@
+.header {
+    width: inherit;
+    padding: 3px 20px;
+    margin: auto;
+    background-color: #154c79;
+    color: #ddd;
+    border-radius: 0px 0 20px 20px;
+}
+
+.normal-form {
+    margin: 10px;
+}
+
+.container {
+    width: 100%;
+    padding: 0 1.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.container>* {
+    width: 100%;
+}
+
+.button-submit {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #154c79;
+    color: #ddd;
+}
+
+.button-cancel {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ddd;
+    color: #154c79;
+}
+
+.button-row {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.button-row button {
+    margin: 5px;
+}
+
+.mat-grid-list {
+    width: 100%;
+}
+
+.status {
+    background-color: #eee;
+    padding-left: 2.5%;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.comments {
+    background-color: #eee;
+    padding-left: 2.5%;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.scroll {
+    width: 100%;
+    height: 150px;
+    overflow: auto;
+}
+
+span {
+    color: #154c79;
+}
+
+/*
+.mat-grid-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.mat-grid-tile-content {
+    flex-grow: 1;
+} */

@@ -1,0 +1,63 @@
+<div class="header">
+    <h1>View Ticket</h1>
+    <!-- <h1>{{ticketEdit === null ? "Create Ticket" : "Edit Ticket"}}</h1> -->
+</div>
+<form [formGroup]="form!" class="normal-form">
+    <mat-grid-list [cols]="cols | async" rowHeight="450px">
+        <mat-grid-tile>
+            <div class="container">
+                <!-- ... -->
+                <div class="status">
+                    <h3>status: <span *ngIf="row.status === 0">new</span>
+                        <span *ngIf="row.status === 1">open</span>
+                        <span *ngIf="row.status === 2">closed</span>
+                    </h3>
+                </div>
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>title</mat-label>
+                    <input formControlName="title" matInput placeholder="title">
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>product</mat-label>
+                    <input formControlName="productID" matInput placeholder="prodect">
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- <mat-form-field>
+                    <mat-label>file</mat-label>
+                    <input formControlName="file" matInput placeholder="file">
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field> -->
+                <!-- ... -->
+                <mat-form-field>
+                    <mat-label>description</mat-label>
+                    <textarea formControlName="description" matInput
+                        placeholder="write your description here"></textarea>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
+                <!-- ... -->
+                <mat-label>Comment</mat-label>
+                <div class="scroll">
+                    <div class="comments" *ngFor="let comm of comments">
+                        <h3>{{comm.owner === 1? 'Employee' : 'Client'}}</h3>
+                        <p>{{comm.text}}</p>
+                    </div>
+                </div>
+                <!-- ... -->
+            </div>
+        </mat-grid-tile>
+        <!-- //////////// -->
+        <!-- <mat-grid-tile>
+            <div class="container">
+                
+            </div>
+        </mat-grid-tile> -->
+    </mat-grid-list>
+    <!-- ... -->
+    <div class="button-row">
+        <button class="button-cancel" mat-stroked-button (click)="onCancel()">Close</button>
+    </div>
+    <!-- ... -->
+</form>
